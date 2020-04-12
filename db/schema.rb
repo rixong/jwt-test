@@ -10,16 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_182906) do
+ActiveRecord::Schema.define(version: 2020_04_12_140344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "repos", force: :cascade do |t|
+    t.string "git_id"
+    t.string "name"
+    t.string "html_url"
+    t.string "branches_url"
+    t.string "repo_created_at"
+    t.string "repo_updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "timelines", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "timelines_repos", force: :cascade do |t|
+    t.integer "timeline_id"
+    t.integer "repo_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "username"
+    t.string "email"
     t.string "password_digest"
-    t.string "bio"
-    t.string "avatar"
+    t.string "name"
+    t.string "git_username"
+    t.string "git_userid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
