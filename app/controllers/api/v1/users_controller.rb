@@ -19,7 +19,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation, :bio, :avatar)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :git_username, :git_userid)
     end
 
 end

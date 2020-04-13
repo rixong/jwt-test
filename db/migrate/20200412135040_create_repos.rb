@@ -7,6 +7,7 @@ class CreateRepos < ActiveRecord::Migration[6.0]
       t.string :branches_url
       t.string :repo_created_at
       t.string :repo_updated_at
+      t.string :git_username
       t.timestamps
     end
   end

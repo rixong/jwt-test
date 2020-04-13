@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_04_12_140344) do
     t.string "branches_url"
     t.string "repo_created_at"
     t.string "repo_updated_at"
+    t.string "git_username"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
