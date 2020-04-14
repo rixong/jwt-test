@@ -10,7 +10,7 @@ class ReposController < ApplicationController
     uri = URI.parse(url)
     response = Net::HTTP.get_response(uri)
     result = JSON.parse(response.body)
-    result.each do |repo| 
+    result.each do |repo|
       Repo.create(
         git_id: repo['id'], 
         name: repo['name'], 
@@ -21,7 +21,8 @@ class ReposController < ApplicationController
         repo_updated_at: repo['updated_at']
       )
     end
-      render json: {message: "#{result.count} public repos were found for user:#{params[:github_username]} "}
+    repos = Repo.where("git_username = ?", params[:github_username])
+    render json: repos
   end
 
   def index
