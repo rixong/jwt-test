@@ -15,8 +15,8 @@ class ReposController < ApplicationController
       render json: {message: "Not a valid Github Username"}
     else
         ### Checks if Timeline already exists for current user, if not it creates one
-      tl = Timeline.where(['name = ? and user_id = ?',user_name, current_user.id])
-      if tl.empty?
+      tl = Timeline.where(['name = ? and user_id = ?',user_name, current_user.id])[0]
+      if !tl
         puts 'New timeline  !XXXXXXXXXXXXXXXXXXXXXXXXXXX'
         tl = Timeline.create(name: user_name, user_id: current_user.id)
       end
@@ -26,7 +26,7 @@ class ReposController < ApplicationController
           ### if repo doesn't exist, create it
         if !Repo.find_by(git_id: repo['id'])
           rp = Repo.create(
-            git_id: repo['id'], 
+            git_id: repo['id'],
             name: repo['name'],
             git_username: user_name,
             html_url: repo['html_url'],
@@ -36,8 +36,8 @@ class ReposController < ApplicationController
           )
         end
           ##Create unique TLR for each repo (for curUser)
-          puts "XXXXXXXX #{tl[0].id} .. #{repo['id']}"
-        TimelineRepo.create(timeline_id: tl[0].id, repo_id: repo['id'])
+          id = Repo.find_by(git_id: repo['id']).id
+        TimelineRepo.create(timeline_id: tl.id, repo_id: id)
       end
       repos = Repo.where("git_username = ?", user_name)
       render json: {message: "OK!", result: repos}
