@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_04_12_140344) do
   end
 
   create_table "timelines", force: :cascade do |t|
+    t.string "name"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
