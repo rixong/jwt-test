@@ -12,7 +12,7 @@ class ReposController < ApplicationController
     response = Net::HTTP.get_response(uri)
     result = JSON.parse(response.body)
       ### Checks if request is valid URI and there is content
-    if response.message != 'OK' || result.count == 0 
+    if response.message != 'OK' || result.count == 0
       render json: {message: "Not a valid Github Username", result: []}
     else
         ### Checks if Timeline already exists for current user, if not it creates one
