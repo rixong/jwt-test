@@ -6,6 +6,7 @@ class ReposController < ApplicationController
 
   def create
     user_name = params[:github_username].downcase
+    # url = "https://api.github.com/users/#{user_name}/repos"
     url = "https://api.github.com/users/#{user_name}/repos?per_page=100"
     uri = URI.parse(url)
     response = Net::HTTP.get_response(uri)
